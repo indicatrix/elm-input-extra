@@ -1,7 +1,7 @@
 {
     "version": "5.2.2",
     "summary": "Commonly used Html element with extra functionality",
-    "repository": "https://github.com/abadi199/elm-input-extra.git",
+    "repository": "https://github.com/sitewisely/elm-input-extra.git",
     "license": "BSD3",
     "source-directories": [
         "src"

@@ -9,6 +9,7 @@ module Input.Number exposing (Options, StringOptions, input, inputString, defaul
 -}
 
 import Html exposing (Attribute, Html)
+import Html.Attributes
 import Html.Attributes exposing (style, type_)
 import Html.Events exposing (onWithOptions, keyCode)
 import Html.Attributes as Attributes exposing (value)

@@ -1,8 +1,8 @@
 module DropdownDemo exposing (main)
 
-import Html exposing (Html, text, p, label, form, ul, li)
-import Html.Attributes exposing (style, for)
 import Dropdown
+import Html exposing (Html, form, label, li, p, text, ul)
+import Html.Attributes exposing (for, style)
 
 
 main : Program Never Model Msg
@@ -34,13 +34,13 @@ dropdownOptions =
         defaultOptions =
             Dropdown.defaultOptions DropdownChanged
     in
-        { defaultOptions
-            | items =
-                [ { value = "1", text = "One", enabled = True }
-                , { value = "2", text = "Two", enabled = True }
-                ]
-            , emptyItem = Just { value = "0", text = "[Please Select]", enabled = True }
-        }
+    { defaultOptions
+        | items =
+            [ { value = "1", text = "One", enabled = True }
+            , { value = "2", text = "Two", enabled = True }
+            ]
+        , emptyItem = Just { value = "0", text = "[Please Select]", enabled = True }
+    }
 
 
 subscriptions : Model -> Sub Msg

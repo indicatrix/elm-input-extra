@@ -4,8 +4,12 @@
   "description": "Demo for elm-input-extra",
   "main": "index.js",
   "scripts": {
-    "build": "elm-make *.elm --yes --output demo.js"
+    "build": "elm make *.elm --output demo.js"
   },
   "author": "Abadi Kurniawan",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "elm": "^0.19.0-bugfix2",
+    "elm-format": "^0.8.1"
+  }
 }

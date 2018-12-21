@@ -1,7 +1,7 @@
 module MultiSelectDemo exposing (main)
 
-import Html exposing (Html, text, p, label, form, ul, li)
-import Html.Attributes exposing (style, for)
+import Html exposing (Html, form, label, li, p, text, ul)
+import Html.Attributes exposing (for, style)
 import MultiSelect
 
 
@@ -34,14 +34,14 @@ multiSelectOptions =
         defaultOptions =
             MultiSelect.defaultOptions MultiSelectChanged
     in
-        { defaultOptions
-            | items =
-                [ { value = "1", text = "One", enabled = True }
-                , { value = "2", text = "Two", enabled = True }
-                , { value = "3", text = "Three", enabled = True }
-                , { value = "4", text = "Four", enabled = True }
-                ]
-        }
+    { defaultOptions
+        | items =
+            [ { value = "1", text = "One", enabled = True }
+            , { value = "2", text = "Two", enabled = True }
+            , { value = "3", text = "Three", enabled = True }
+            , { value = "4", text = "Four", enabled = True }
+            ]
+    }
 
 
 subscriptions : Model -> Sub Msg
@@ -63,9 +63,14 @@ view model =
             ]
         , p []
             [ ul []
-                [ li [] [ text "Selected Values: ", text <| toString model.selectedValue ] ]
+                [ li [] [ text "Selected Values: ", text <| showSelectedValue model.selectedValue ] ]
             ]
         ]
+
+
+showSelectedValue : List String -> String
+showSelectedValue l =
+    String.join "," l
 
 
 type Msg

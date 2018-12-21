@@ -1,7 +1,7 @@
 module InputNumberDemo exposing (main)
 
-import Html exposing (Html, text, p, label, form, ul, li)
-import Html.Attributes as Html exposing (style, for)
+import Html exposing (Html, form, label, li, p, text, ul)
+import Html.Attributes as Html exposing (for, style)
 import Input.Number as Number
 
 
@@ -36,12 +36,12 @@ inputOptions =
         defaultOptions =
             Number.defaultOptions InputChanged
     in
-        { defaultOptions
-            | maxLength = Nothing
-            , maxValue = Just 1000
-            , minValue = Just 10
-            , hasFocus = Just FocusChanged
-        }
+    { defaultOptions
+        | maxLength = Nothing
+        , maxValue = Just 1000
+        , minValue = Just 10
+        , hasFocus = Just FocusChanged
+    }
 
 
 inputStringOptions : Number.StringOptions Msg
@@ -50,12 +50,12 @@ inputStringOptions =
         defaultOptions =
             Number.defaultStringOptions InputStringChanged
     in
-        { defaultOptions
-            | maxLength = Just 4
-            , maxValue = Just 1000
-            , minValue = Just 10
-            , hasFocus = Just FocusStringChanged
-        }
+    { defaultOptions
+        | maxLength = Just 4
+        , maxValue = Just 1000
+        , minValue = Just 10
+        , hasFocus = Just FocusStringChanged
+    }
 
 
 subscriptions : Model -> Sub Msg
@@ -77,11 +77,11 @@ view model =
             ]
         , p []
             [ ul []
-                [ li [] [ text "Max Length: ", text <| Maybe.withDefault "No Limit" <| Maybe.map toString <| inputOptions.maxLength ]
-                , li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map toString <| inputOptions.maxValue ]
-                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map toString <| inputOptions.minValue ]
-                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map toString <| model.value ]
-                , li [] [ text "Has Focus: ", text <| toString model.hasFocus ]
+                [ li [] [ text "Max Length: ", text <| Maybe.withDefault "No Limit" <| Maybe.map String.fromInt <| inputOptions.maxLength ]
+                , li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromInt <| inputOptions.maxValue ]
+                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromInt <| inputOptions.minValue ]
+                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromInt <| model.value ]
+                , li [] [ text "Has Focus: ", text <| String.fromInt model.hasFocus ]
                 ]
             ]
         , p []
@@ -95,11 +95,11 @@ view model =
             ]
         , p []
             [ ul []
-                [ li [] [ text "Max Length: ", text <| Maybe.withDefault "No Limit" <| Maybe.map toString <| inputOptions.maxLength ]
-                , li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map toString <| inputOptions.maxValue ]
-                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map toString <| inputOptions.minValue ]
-                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map toString <| model.value ]
-                , li [] [ text "Has Focus: ", text <| toString model.hasFocus ]
+                [ li [] [ text "Max Length: ", text <| Maybe.withDefault "No Limit" <| Maybe.map String.fromInt <| inputOptions.maxLength ]
+                , li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromInt <| inputOptions.maxValue ]
+                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromInt <| inputOptions.minValue ]
+                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromInt <| model.value ]
+                , li [] [ text "Has Focus: ", text <| String.fromInt model.hasFocus ]
                 ]
             ]
         ]

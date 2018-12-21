@@ -1,4 +1,4 @@
-module Utility exposing (join)
+module Utility exposing (KeyCode, join)
 
 
 join : Maybe (Maybe a) -> Maybe a
@@ -9,3 +9,7 @@ join mx =
 
         Nothing ->
             Nothing
+
+
+type alias KeyCode =
+    Int

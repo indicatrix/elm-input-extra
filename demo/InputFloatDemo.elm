@@ -3,6 +3,7 @@ module InputFloatDemo exposing (main)
 import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes as Html exposing (for, style)
 import Input.Float as Float
+import String
 
 
 main : Program Never Model Msg
@@ -75,10 +76,10 @@ view model =
             ]
         , p []
             [ ul []
-                [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map toString <| inputOptions.maxValue ]
-                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map toString <| inputOptions.minValue ]
-                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map toString <| model.value ]
-                , li [] [ text "Has Focus: ", text <| toString model.hasFocus ]
+                [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromFloat <| inputOptions.maxValue ]
+                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromFloat <| inputOptions.minValue ]
+                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromFloat <| model.value ]
+                , li [] [ text "Has Focus: ", text <| String.fromFloat model.hasFocus ]
                 ]
             ]
         , p []
@@ -92,10 +93,10 @@ view model =
             ]
         , p []
             [ ul []
-                [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map toString <| inputOptions.maxValue ]
-                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map toString <| inputOptions.minValue ]
-                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map toString <| model.value ]
-                , li [] [ text "Has Focus: ", text <| toString model.hasFocus ]
+                [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromFloat <| inputOptions.maxValue ]
+                , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromFloat <| inputOptions.minValue ]
+                , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromFloat <| model.value ]
+                , li [] [ text "Has Focus: ", text <| String.fromFloat model.hasFocus ]
                 ]
             ]
         ]

@@ -1,15 +1,16 @@
 module Main exposing (main)
 
+import Browser
+import Html exposing (Html, text)
+import Html.App as Html
+import Html.Attributes exposing (for, style)
 import Input.Number as Number
 import Input.Text as Text
-import Html exposing (Html, text)
-import Html.Attributes exposing (style, for)
-import Html.App as Html
 
 
 main : Program Never
 main =
-    Html.beginnerProgram
+    Browser.sandbox
         { model = init
         , update = update
         , view = view
@@ -47,11 +48,9 @@ view model =
         [ Html.p []
             [ Html.label [ for model.numberOptions.id ] [ text "Number Input" ]
             , Number.input model.numberOptions
-                [ style
-                    [ ( "border", "1px solid #ccc" )
-                    , ( "padding", ".5rem" )
-                    , ( "box-shadow", "inset 0 1px 1px rgba(0,0,0,.075);" )
-                    ]
+                [ style "border" "1px solid #ccc"
+                , style "padding" ".5rem"
+                , style "box-shadow" "inset 0 1px 1px rgba(0,0,0,.075);"
                 ]
                 model.numberModel
                 |> Html.map UpdateNumber
@@ -60,11 +59,9 @@ view model =
         , Html.p []
             [ Html.label [ for model.textOptions.id ] [ text "Text Input" ]
             , Text.input model.textOptions
-                [ style
-                    [ ( "border", "1px solid #ccc" )
-                    , ( "padding", ".5rem" )
-                    , ( "box-shadow", "inset 0 1px 1px rgba(0,0,0,.075);" )
-                    ]
+                [ style "border" "1px solid #ccc"
+                , style "padding" ".5rem"
+                , style "box-shadow" "inset 0 1px 1px rgba(0,0,0,.075);"
                 ]
                 model.textModel
                 |> Html.map UpdateText

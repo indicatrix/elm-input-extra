@@ -1,7 +1,7 @@
 module MaskedInputTextDemo exposing (main)
 
-import Html exposing (Html, text, p, label, form, ul, li)
-import Html.Attributes as Html exposing (style, for)
+import Html exposing (Html, form, label, li, p, text, ul)
+import Html.Attributes as Html exposing (for, style)
 import MaskedInput.Text as MaskedText
 
 
@@ -35,10 +35,10 @@ inputOptions =
         defaultOptions =
             MaskedText.defaultOptions InputChanged InputStateChanged
     in
-        { defaultOptions
-            | pattern = "(###) ###-####"
-            , hasFocus = Just FocusChanged
-        }
+    { defaultOptions
+        | pattern = "(###) ###-####"
+        , hasFocus = Just FocusChanged
+    }
 
 
 subscriptions : Model -> Sub Msg
@@ -63,10 +63,19 @@ view model =
             [ ul []
                 [ li [] [ text "Pattern: ", text inputOptions.pattern ]
                 , li [] [ text "Value: ", text model.value ]
-                , li [] [ text "Has Focus: ", text <| toString model.hasFocus ]
+                , li [] [ text "Has Focus: ", text <| showBool model.hasFocus ]
                 ]
             ]
         ]
+
+
+showBool : Bool -> String
+showBool b =
+    if b then
+        "True"
+
+    else
+        "False"
 
 
 type Msg

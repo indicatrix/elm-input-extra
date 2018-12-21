@@ -1,5 +1,6 @@
 module InputNumberDemo exposing (main)
 
+import Browser
 import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes as Html exposing (for, style)
 import Input.Number as Number
@@ -7,7 +8,7 @@ import Input.Number as Number
 
 main : Program Never Model Msg
 main =
-    Html.program
+    Browser.element
         { init = init
         , update = update
         , view = view

@@ -1,14 +1,16 @@
 module InputFloatDemo exposing (main)
 
+import Browser
 import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes as Html exposing (for, style)
 import Input.Float as Float
 import String
+import Utility
 
 
 main : Program Never Model Msg
 main =
-    Html.program
+    Browser.element
         { init = init
         , update = update
         , view = view
@@ -79,7 +81,7 @@ view model =
                 [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromFloat <| inputOptions.maxValue ]
                 , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromFloat <| inputOptions.minValue ]
                 , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromFloat <| model.value ]
-                , li [] [ text "Has Focus: ", text <| String.fromFloat model.hasFocus ]
+                , li [] [ text "Has Focus: ", text <| Utility.showBool model.hasFocus ]
                 ]
             ]
         , p []
@@ -96,7 +98,7 @@ view model =
                 [ li [] [ text "Max Value: ", text <| Maybe.withDefault "No Max" <| Maybe.map String.fromFloat <| inputOptions.maxValue ]
                 , li [] [ text "Min Value: ", text <| Maybe.withDefault "No Min" <| Maybe.map String.fromFloat <| inputOptions.minValue ]
                 , li [] [ text "Value: ", text <| Maybe.withDefault "NaN" <| Maybe.map String.fromFloat <| model.value ]
-                , li [] [ text "Has Focus: ", text <| String.fromFloat model.hasFocus ]
+                , li [] [ text "Has Focus: ", text <| Utility.showBool model.hasFocus ]
                 ]
             ]
         ]

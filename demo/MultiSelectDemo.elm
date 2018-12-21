@@ -1,5 +1,6 @@
 module MultiSelectDemo exposing (main)
 
+import Browser
 import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes exposing (for, style)
 import MultiSelect
@@ -7,7 +8,7 @@ import MultiSelect
 
 main : Program Never Model Msg
 main =
-    Html.program
+    Browser.element
         { init = init
         , update = update
         , view = view

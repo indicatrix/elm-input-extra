@@ -176,7 +176,7 @@ input options attributes currentValue =
                 |> Maybe.withDefault ""
                 |> value
             , onKeyDown options currentValue
-            , Html.Events.onInput (String.toFloat >> Result.toMaybe >> options.onInput)
+            , Html.Events.onInput (String.toFloat >> options.onInput)
             , onChange options
             , type_ "number"
             ]
@@ -365,7 +365,6 @@ isValid newValue options =
         updatedNumber =
             newValue
                 |> String.toFloat
-                |> Result.toMaybe
     in
     not (exceedMaxValue options.maxValue updatedNumber)
 
@@ -390,7 +389,6 @@ onChange options =
         toFloat string =
             string
                 |> String.toFloat
-                |> Result.toMaybe
                 |> checkWithMinValue
                 |> checkWithMaxValue
     in
@@ -421,7 +419,7 @@ onChangeString options =
                 number
 
         leadingZero string =
-            Regex.find (Regex.AtMost 1) leadingZeroRegex string
+            Regex.findAtMost 1 leadingZeroRegex string
                 |> List.head
                 |> Maybe.map .match
                 |> Maybe.withDefault ""
@@ -429,24 +427,33 @@ onChangeString options =
         toFloat string =
             string
                 |> String.toFloat
-                |> Result.toMaybe
                 |> checkWithMinValue
                 |> checkWithMaxValue
-                |> String.fromFloat
+                |> showMaybeFloat
                 |> (\a -> (++) a (leadingZero string))
     in
     Html.Events.on "change" (Json.map options.onInput Html.Events.targetValue)
 
 
+showMaybeFloat : Maybe Float -> String
+showMaybeFloat f =
+    case f of
+        Just s ->
+            String.fromFloat s
+
+        Nothing ->
+            ""
+
+
 lessThanMinValue : Maybe Float -> Maybe Float -> Bool
 lessThanMinValue minValue number =
     number
-        |> Maybe.map2 (\min number -> number < min) minValue
+        |> Maybe.map2 (\min n -> n < min) minValue
         |> Maybe.withDefault False
 
 
 exceedMaxValue : Maybe Float -> Maybe Float -> Bool
 exceedMaxValue maxValue number =
     number
-        |> Maybe.map2 (\max number -> number > max) maxValue
+        |> Maybe.map2 (\max n -> n > max) maxValue
         |> Maybe.withDefault False

@@ -1,4 +1,4 @@
-module Utility exposing (KeyCode, join)
+module Utility exposing (KeyCode, join, showBool)
 
 
 join : Maybe (Maybe a) -> Maybe a
@@ -13,3 +13,12 @@ join mx =
 
 type alias KeyCode =
     Int
+
+
+showBool : Bool -> String
+showBool b =
+    if b then
+        "True"
+
+    else
+        "False"

@@ -8,13 +8,12 @@ import String
 import Utility
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -26,11 +25,9 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { value = Nothing, valueString = "", hasFocus = False, hasFocusString = False }
-    , Cmd.none
-    )
+    { value = Nothing, valueString = "", hasFocus = False, hasFocusString = False }
 
 
 inputOptions : Float.Options Msg
@@ -57,11 +54,6 @@ inputStringOptions =
         , minValue = Just 10
         , hasFocus = Just FocusStringChanged
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -112,20 +104,20 @@ type Msg
     | FocusStringChanged Bool
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         InputChanged value ->
-            ( { model | value = value }, Cmd.none )
+            { model | value = value }
 
         FocusChanged bool ->
-            ( { model | hasFocus = bool }, Cmd.none )
+            { model | hasFocus = bool }
 
         InputStringChanged value ->
-            ( { model | valueString = value }, Cmd.none )
+            { model | valueString = value }
 
         FocusStringChanged bool ->
-            ( { model | hasFocusString = bool }, Cmd.none )
+            { model | hasFocusString = bool }

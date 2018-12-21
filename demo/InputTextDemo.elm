@@ -6,13 +6,12 @@ import Html.Attributes as Html exposing (for, style)
 import Input.Text as Text
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -22,11 +21,9 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { value = "", hasFocus = False }
-    , Cmd.none
-    )
+    { value = "", hasFocus = False }
 
 
 inputOptions : Text.Options Msg
@@ -39,11 +36,6 @@ inputOptions =
         | maxLength = Just 5
         , hasFocus = Just FocusChanged
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -83,14 +75,14 @@ type Msg
     | FocusChanged Bool
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         InputChanged value ->
-            ( { model | value = value }, Cmd.none )
+            { model | value = value }
 
         FocusChanged bool ->
-            ( { model | hasFocus = bool }, Cmd.none )
+            { model | hasFocus = bool }

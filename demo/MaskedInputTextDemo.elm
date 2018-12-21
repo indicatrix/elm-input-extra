@@ -6,13 +6,12 @@ import Html.Attributes as Html exposing (for, style)
 import MaskedInput.Text as MaskedText
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -23,11 +22,9 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { value = "", hasFocus = False, state = MaskedText.initialState }
-    , Cmd.none
-    )
+    { value = "", hasFocus = False, state = MaskedText.initialState }
 
 
 inputOptions : MaskedText.Options Msg
@@ -40,11 +37,6 @@ inputOptions =
         | pattern = "(###) ###-####"
         , hasFocus = Just FocusChanged
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -86,17 +78,17 @@ type Msg
     | InputStateChanged MaskedText.State
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         InputChanged value ->
-            ( { model | value = value }, Cmd.none )
+            { model | value = value }
 
         FocusChanged bool ->
-            ( { model | hasFocus = bool }, Cmd.none )
+            { model | hasFocus = bool }
 
         InputStateChanged state ->
-            ( { model | state = state }, Cmd.none )
+            { model | state = state }

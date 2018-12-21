@@ -6,13 +6,12 @@ import Html.Attributes exposing (for, style)
 import MultiSelect
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -21,12 +20,10 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { selectedValue = []
-      }
-    , Cmd.none
-    )
+    { selectedValue = []
+    }
 
 
 multiSelectOptions : MultiSelect.Options Msg
@@ -43,11 +40,6 @@ multiSelectOptions =
             , { value = "4", text = "Four", enabled = True }
             ]
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -79,11 +71,11 @@ type Msg
     | MultiSelectChanged (List String)
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         MultiSelectChanged selectedValue ->
-            ( { model | selectedValue = selectedValue }, Cmd.none )
+            { model | selectedValue = selectedValue }

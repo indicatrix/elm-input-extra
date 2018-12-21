@@ -4,15 +4,15 @@ import Browser
 import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes as Html exposing (for, style)
 import MaskedInput.Number as MaskedNumber
+import Utility
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -23,11 +23,9 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { value = Nothing, hasFocus = False, state = MaskedNumber.initialState }
-    , Cmd.none
-    )
+    { value = Nothing, hasFocus = False, state = MaskedNumber.initialState }
 
 
 inputOptions : MaskedNumber.Options Msg
@@ -40,11 +38,6 @@ inputOptions =
         | pattern = "(###) ###-####"
         , hasFocus = Just FocusChanged
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -63,8 +56,8 @@ view model =
         , p []
             [ ul []
                 [ li [] [ text "Pattern: ", text inputOptions.pattern ]
-                , li [] [ text "Value: ", text <| String.fromInt model.value ]
-                , li [] [ text "Has Focus: ", text <| String.fromInt model.hasFocus ]
+                , li [] [ text "Value: ", text <| Utility.showMaybeInt model.value ]
+                , li [] [ text "Has Focus: ", text <| Utility.showBool model.hasFocus ]
                 ]
             ]
         ]
@@ -77,17 +70,17 @@ type Msg
     | InputStateChanged MaskedNumber.State
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         InputChanged value ->
-            ( { model | value = value }, Cmd.none )
+            { model | value = value }
 
         FocusChanged bool ->
-            ( { model | hasFocus = bool }, Cmd.none )
+            { model | hasFocus = bool }
 
         InputStateChanged state ->
-            ( { model | state = state }, Cmd.none )
+            { model | state = state }

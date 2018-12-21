@@ -26,6 +26,7 @@ import Input.KeyCode exposing (allowedKeyCodes)
 import Json.Decode as Json
 import Regex
 import String
+import Utility
 
 
 type alias GenericOptions options =
@@ -429,20 +430,10 @@ onChangeString options =
                 |> String.toFloat
                 |> checkWithMinValue
                 |> checkWithMaxValue
-                |> showMaybeFloat
+                |> Utility.showMaybeFloat
                 |> (\a -> (++) a (leadingZero string))
     in
     Html.Events.on "change" (Json.map options.onInput Html.Events.targetValue)
-
-
-showMaybeFloat : Maybe Float -> String
-showMaybeFloat f =
-    case f of
-        Just s ->
-            String.fromFloat s
-
-        Nothing ->
-            ""
 
 
 lessThanMinValue : Maybe Float -> Maybe Float -> Bool

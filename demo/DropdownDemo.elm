@@ -6,13 +6,12 @@ import Html exposing (Html, form, label, li, p, text, ul)
 import Html.Attributes exposing (for, style)
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
         , view = view
-        , subscriptions = subscriptions
         }
 
 
@@ -21,12 +20,10 @@ type alias Model =
     }
 
 
-init : ( Model, Cmd Msg )
+init : Model
 init =
-    ( { selectedValue = Nothing
-      }
-    , Cmd.none
-    )
+    { selectedValue = Nothing
+    }
 
 
 dropdownOptions : Dropdown.Options Msg
@@ -42,11 +39,6 @@ dropdownOptions =
             ]
         , emptyItem = Just { value = "0", text = "[Please Select]", enabled = True }
     }
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 
 view : Model -> Html Msg
@@ -73,11 +65,11 @@ type Msg
     | DropdownChanged (Maybe String)
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, Cmd.none )
+            model
 
         DropdownChanged selectedValue ->
-            ( { model | selectedValue = selectedValue }, Cmd.none )
+            { model | selectedValue = selectedValue }

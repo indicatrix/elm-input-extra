@@ -1,4 +1,4 @@
-module Utility exposing (KeyCode, join, showBool)
+module Utility exposing (KeyCode, join, showBool, showMaybeFloat, showMaybeInt)
 
 
 join : Maybe (Maybe a) -> Maybe a
@@ -22,3 +22,23 @@ showBool b =
 
     else
         "False"
+
+
+showMaybeInt : Maybe Int -> String
+showMaybeInt i =
+    case i of
+        Just s ->
+            String.fromInt s
+
+        Nothing ->
+            ""
+
+
+showMaybeFloat : Maybe Float -> String
+showMaybeFloat f =
+    case f of
+        Just s ->
+            String.fromFloat s
+
+        Nothing ->
+            ""

@@ -3,7 +3,7 @@
     "name": "indicatrix/elm-input-extra",
     "summary": "Commonly used Html element with extra functionality",
     "license": "BSD-3-Clause",
-    "version": "5.2.2",
+    "version": "1.0.0",
     "exposed-modules": [
         "Input.Number",
         "Input.BigNumber",
@@ -13,7 +13,6 @@
         "MaskedInput.Text",
         "MaskedInput.Number",
         "Input.Float",
-        "Input.KeyCode",
         "Diff",
         "Dropdown",
         "MultiSelect"
